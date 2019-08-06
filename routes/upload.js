@@ -5,7 +5,7 @@ var express = require('express');
          return res.status(400).json({msg: 'No file uploaded'})
      }
      const file = req.files.file
-     file.mv(`/home/nhuhuynh/Desktop/reactJS/severLoL/reactjslol/static/upload/${file.name}`,err=>{
+     file.mv(`public/image/${file.name}`,err=>{
          if(err){
              console.log(err);
              return res.status(500).send(err);
