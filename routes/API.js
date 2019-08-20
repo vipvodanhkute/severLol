@@ -35,25 +35,33 @@ router.put('/', (req, res) => {
             res.json({ type: "danger", text: "Please choose name another" })
         } else {
             res.json({ type: "success", text: "Eidted" })
-            APIChamp.find({ key: req.body.key }, (err, champ) => {
-                // console.log(champ)
-                
-                // champ.name = req.body.name
-                // champ.title = req.body.title;
-                // champ.blurb = req.body.blurb;
-                // // if(req.files){
-                // //     champ.image.full=req.files.image.name   
-                // // }
-                champ.save()
-                 /*const path=`public/image/champion/${req.body.pimage}`
-                 fs.remove(path,err=>{
-                    if(err) console.log(err)
-                 })
-                 req.files.image.mv(`public/image/champion/${req.files.image.name}`)*/
-                
+            APIChamp.findOne({ key: req.body.key }, (err, champ) => {
+                champ.name = req.body.name
+                champ.title = req.body.title
+                champ.blurb = req.body.blurb
+                if (req.files) {
+                    champ.image.full = req.files.image.name
+                }
+                champ.save(err => {
+                    if (err) return console.log(err)
+                    if (req.files) {
+                        const path = `public/image/champion/${req.body.pimage}`
+                        fs.remove(path, err => {
+                            if (err) console.log(err)
+                        })
+                        req.files.image.mv(`public/image/champion/${req.files.image.name}`)
+                    }
+                })
             })
         }
     })
+    })
+router.delete('/delete/:name',(req,res)=>{
+     APIChamp.findOneAndDelete({name:req.params.name},(err,data)=>{
+         if(err) console.log(err)
+         console.log(data)
+     })
+     console.log(req.params.name) 
 })
 module.exports = router
 

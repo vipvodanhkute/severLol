@@ -2,39 +2,46 @@ var mongoose=require('mongoose')
 const ApiChampSchema = mongoose.Schema({
     key:{
         type:Number,
-        require:true
+        // require:true
     },
     name:{
         type:String,
-        require:true
+        // require:true
     },
     title:{
         type:String,
-        require:true
+        // require:true
     },
     blurb:{
         type:String,
-        require:true
+        // require:true
     },
     info:{
         type:Object,
-        require:true
+        // require:true
     },
     image:{
-        type:Object,
-        require:true
+        // type:Object,
+        // require:true
+        full:String,
+        sprite:String,
+        group:String,
+        x:Number,
+        y:Number,
+        w:Number,
+        h:Number,
     },
     tags:{
         type:Array,
-        require:true
+        // require:true
     },
     partype:{
         type:String,
-        require:true
+        // require:true
     },
     stats:{
         type:Object,
-        require:true
+        // require:true
     }
 })
 module.exports= mongoose.model('apiChamp',ApiChampSchema)
